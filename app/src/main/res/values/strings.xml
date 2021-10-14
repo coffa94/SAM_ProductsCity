@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">ProductsCity</string>
+    <string name="textview_label_user_type">Scegli tipo utente</string>
+    <string name="button_negozio">Negozio</string>
+    <string name="button_persona">Persona</string>
+    <string name="button_rider">Rider</string>
+    <string name="textview_label_codice_negozio">Inserisci codice negozio</string>
+    <string name="inputedittext_hint_codice_negozio">Codice negozio</string>
+    <string name="button_conferma">Conferma</string>
+    <string name="error_codice_negozio">Errore! Codice negozio non è corretto!</string>
+    <string name="info_shop">Info negozio</string>
+    <string name="shop_product_list">Lista prodotti negozio</string>
+
+    <string name="textview_laber_info_customer">Informazioni cliente</string>
+    <string name="edittext_label_namesurnamecustomer">Nome e cognome cliente</string>
+    <string name="edittext_hint_namesurnamecustomer">Inserisci il nome e cognome cliente</string>
+    <string name="edittext_label_addresscustomer">Indirizzo cliente</string>
+    <string name="edittext_hint_addresscustomer">Inserisci l\'indirizzo cliente</string>
+    <string name="button_locate">Localizza</string>
+    <string name="edittext_label_citycustomer">Città cliente</string>
+    <string name="edittext_hint_citycustomer">Inserisci la città cliente</string>
+    <string name="edittext_label_capcustomer">CAP cliente</string>
+    <string name="edittext_hint_capcustomer">Inserisci il CAP cliente</string>
+    <string name="edittext_label_provincecustomer">Provincia cliente</string>
+    <string name="edittext_hint_provincecustomer">Inserisci la provincia cliente</string>
+    <string name="edittext_label_phonecustomer">Cellulare cliente</string>
+    <string name="edittext_hint_phonecustomer">Inserisci il cellulare cliente</string>
+
+    <string name="textview_label_buyproductlist">Lista prodotti da acquistare</string>
+    <string name="textview_label_totaleuros">€</string>
+    <string name="textview_label_totalorder">Totale ordine</string>
+    <string name="button_next">Avanti</string>
+
+    <string name="textview_label_cartsummary">Riepilogo carrello</string>
+    <string name="textview_label_totalarticlescartsummary">Totale articoli</string>
+    <string name="textview_label_sendingdata">Dati di spedizione</string>
+    <string name="textview_label_quantityproducttobuy">Q.tà</string>
+    <string name="button_back">Indietro</string>
+    <string name="button_modify">Modifica</string>
+
+    <string name="textview_label_datetimeorder">Scelta data e ora di consegna</string>
+    <string name="textview_label_calendar">Calendario</string>
+    <string name="textview_label_time">Orario</string>
+    <string name="edittext_hint_time">Imposta l\'orario della consegna</string>
+
+    <string name="textview_label_recaporder">Riepilogo ordine</string>
+    <string name="button_home">Torna alla home</string>
+
+    <string name="button_retry">Riprova</string>
+    <string name="textview_label_errororder">Errore durante l\'invio dell\'ordine</string>
+
+    <string name="textview_label_codicerider">Inserisci codice rider</string>
+    <string name="edittext_hint_codicerider">Codice rider</string>
+
+    <string name="textview_label_pathdelivery">Percorso di consegna rider</string>
+    <string name="button_pathdelivery">Calcola percorso</string>
+    <string name="edittext_hint_pathdelivery">Indirizzo di consegna</string>
+
+
+    <string name="textview_label_newproduct">Crea nuovo prodotto</string>
+    <string name="edittext_label_namenewproduct">Nome prodotto</string>
+    <string name="edittext_hint_namenewproduct">Inserisci il nome del prodotto</string>
+    <string name="edittext_label_descriptionnewproduct">Descrizione prodotto</string>
+    <string name="edittext_hint_descriptionnewproduct">Inserisci la descrizione del prodotto</string>
+    <string name="edittext_label_pricenewproduct">Prezzo prodotto</string>
+    <string name="edittext_hint_pricenewproduct">Inserisci il prezzo del prodotto</string>
+
+
+    <string name="preferences_user_type">TipoUtente</string>
+
+    <string name="title_activity_display_shop_products">DisplayShopProductsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello World!</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_product_list">Products</string>
+    <string name="title_product_detail">Product Detail</string>
+    <string name="button_toast_text">Toast</string>
+    <string name="button_random_text">Random</string>
+    <string name="button_count_text">Count</string>
+
+</resources>

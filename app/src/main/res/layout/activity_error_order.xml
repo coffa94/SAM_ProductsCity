@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ErrorOrderActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewLabelError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_label_errororder" />
+
+        <TextView
+            android:id="@+id/textViewErrorOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visualizza errore ordine" />
+
+        <Button
+            android:id="@+id/buttonRiprova"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_retry" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
