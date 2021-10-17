@@ -1,5 +1,6 @@
 package com.gmail.davidecoffaro.productscity.utilclass;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,9 @@ public class RVProductListShopAdapter extends RecyclerView.Adapter<RVProductList
 
         String stringImage = listaProdotti.get(position).getImmagine();
         //TODO translate url to image
-        //holder.imageProduct.setImageResource(listaProdotti.get(position).getImmagine());
+        //ImageDownloaderTask imageDownloaderTask = new ImageDownloaderTask(holder.imageProduct);
+        //imageDownloaderTask.execute(stringImage);
+        //holder.imageProduct = null;
     }
 
     @Override
