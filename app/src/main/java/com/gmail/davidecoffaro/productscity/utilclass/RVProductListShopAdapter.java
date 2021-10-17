@@ -52,7 +52,7 @@ public class RVProductListShopAdapter extends RecyclerView.Adapter<RVProductList
         holder.nameProduct.setText(listaProdotti.get(position).getNome());
         holder.priceProduct.setText(Float.toString(listaProdotti.get(position).getPrezzo()));
 
-        URL urlImage = listaProdotti.get(position).getImmagine();
+        String stringImage = listaProdotti.get(position).getImmagine();
         //TODO translate url to image
         //holder.imageProduct.setImageResource(listaProdotti.get(position).getImmagine());
     }

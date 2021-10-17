@@ -57,7 +57,7 @@ public class RVCartProductListAdapter extends RecyclerView.Adapter<RVCartProduct
         holder.nameProduct.setText(listaProdotti.get(position).getNome());
         holder.priceProduct.setText(Float.toString(listaProdotti.get(position).getPrezzo()));
 
-        URL urlImage = listaProdotti.get(position).getImmagine();
+        String urlImage = listaProdotti.get(position).getImmagine();
         //TODO translate url to image
         //holder.imageProduct.setImageResource(listaProdotti.get(position).getImmagine());
 

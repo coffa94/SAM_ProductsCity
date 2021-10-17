@@ -5,7 +5,7 @@ import java.net.URL;
 public class Prodotto {
     private String nome;
     private float prezzo;
-    private URL immagine;
+    private String immagine;
 
     public Prodotto(String nome, float prezzo){
         this.nome = nome;
@@ -14,7 +14,7 @@ public class Prodotto {
 
 
 
-    public Prodotto(String nome, float prezzo, URL immagine){
+    public Prodotto(String nome, float prezzo, String immagine){
         this.nome = nome;
         this.prezzo = prezzo;
         this.immagine = immagine;
@@ -28,7 +28,7 @@ public class Prodotto {
         return prezzo;
     }
 
-    public URL getImmagine() {
+    public String getImmagine() {
         return immagine;
     }
 }
