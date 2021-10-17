@@ -8,8 +8,10 @@
     <string name="inputedittext_hint_codice_negozio">Codice negozio</string>
     <string name="button_conferma">Conferma</string>
     <string name="error_codice_negozio">Errore! Codice negozio non è corretto!</string>
+
     <string name="info_shop">Info negozio</string>
     <string name="shop_product_list">Lista prodotti negozio</string>
+    <string name="edittext_mail_rider">Mail rider</string>
 
     <string name="textview_laber_info_customer">Informazioni cliente</string>
     <string name="edittext_label_namesurnamecustomer">Nome e cognome cliente</string>
@@ -81,5 +83,6 @@
     <string name="button_toast_text">Toast</string>
     <string name="button_random_text">Random</string>
     <string name="button_count_text">Count</string>
+
 
 </resources>

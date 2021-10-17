@@ -47,7 +47,17 @@
         android:layout_height="match_parent"
         android:layout_gravity="top|end"
         android:layout_marginTop="128sp"
-        android:layout_marginBottom="96sp" />
+        android:layout_marginBottom="96sp" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <EditText
+        android:id="@+id/editTextMailRider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/edittext_mail_rider" />
 
     <Button
         android:id="@+id/buttonConfirm"
