@@ -24,7 +24,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="Image product"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_launcher_foreground"
+                android:background="@drawable/ic_launcher_background"/>
 
             <TextView
                 android:id="@+id/textViewProductName"
