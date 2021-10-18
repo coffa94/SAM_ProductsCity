@@ -11,7 +11,7 @@
 
     <string name="info_shop">Info negozio</string>
     <string name="shop_product_list">Lista prodotti negozio</string>
-    <string name="edittext_mail_rider">Mail rider</string>
+    <string name="edittext_hint_mailrider">Mail rider</string>
 
     <string name="textview_laber_info_customer">Informazioni cliente</string>
     <string name="edittext_label_namesurnamecustomer">Nome e cognome cliente</string>
