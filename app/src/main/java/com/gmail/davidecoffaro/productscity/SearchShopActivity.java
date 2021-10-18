@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SearchShopActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +27,14 @@ public class SearchShopActivity extends AppCompatActivity implements View.OnClic
 
         //set listener on the buttonConferma
         buttonConferma.setOnClickListener(this);
+
+        Intent i = this.getIntent();
+        if(i.hasExtra("Saved")){
+            if(i.getBooleanExtra("Saved", Boolean.FALSE)){
+                Snackbar.make(buttonConferma,"Salvataggio completato", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        }
     }
 
     @Override
