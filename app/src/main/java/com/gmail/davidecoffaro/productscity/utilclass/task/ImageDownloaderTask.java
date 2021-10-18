@@ -1,4 +1,4 @@
-package com.gmail.davidecoffaro.productscity.utilclass;
+package com.gmail.davidecoffaro.productscity.utilclass.task;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
