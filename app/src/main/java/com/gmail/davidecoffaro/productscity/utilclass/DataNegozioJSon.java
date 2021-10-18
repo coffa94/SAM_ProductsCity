@@ -7,7 +7,7 @@ public class DataNegozioJSon {
     private String mailrider;
 
     public DataNegozioJSon(){
-        
+
     }
 
     public DataNegozioJSon(ArrayList<Prodotto> inputListaProdotti, String inputMailRider){
@@ -29,5 +29,17 @@ public class DataNegozioJSon {
 
     public void setMailrider(String mailrider) {
         this.mailrider = mailrider;
+    }
+
+    public void addNewProduct(Prodotto newProduct){
+        listaprodotti.add(newProduct);
+    }
+
+    public void modifyExistingProduct(int numberProduct, String newNameProduct, String newDescriptionProduct, float newPrice){
+        listaprodotti.get(numberProduct).setNome(newNameProduct);
+        listaprodotti.get(numberProduct).setDescrizione(newDescriptionProduct);
+        listaprodotti.get(numberProduct).setPrezzo(newPrice);
+
+
     }
 }
