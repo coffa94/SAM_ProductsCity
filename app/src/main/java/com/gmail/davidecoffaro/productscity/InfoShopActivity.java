@@ -1,13 +1,21 @@
 package com.gmail.davidecoffaro.productscity;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import com.gmail.davidecoffaro.productscity.utilclass.DataNegozioJSon;
+import com.gmail.davidecoffaro.productscity.utilclass.Prodotto;
 import com.gmail.davidecoffaro.productscity.utilclass.RVProductListShopAdapter;
+import com.gmail.davidecoffaro.productscity.utilclass.task.SaveShopFileJSonTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -34,8 +42,34 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
     Button confirm;
     FloatingActionButton fab;
     CoordinatorLayout cl;
+    RecyclerView rv;
+    RVProductListShopAdapter rvAdapter;
     DataNegozioJSon negozioJSon;
     EditText mailRider;
+
+    //use of this because startActivityForResult is deprecated
+    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    // Handle the returned result
+                    if(result.getResultCode()==RESULT_OK){
+                        Intent i = result.getData();
+
+                        //check intent from newProductActivity for modified product or new product
+                        checkIntentActivity(i);
+
+                        //save shop info on file json
+                        saveShopFileJSon("OnActivityResult");
+
+                    }
+
+                }
+            });
+
+    public void startNewProductActivityForResult(Intent i){
+        mStartForResult.launch(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +83,7 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
 
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerViewProductsList);
+        rv = (RecyclerView) findViewById(R.id.recyclerViewProductsList);
 
         rv.setHasFixedSize(true);
 
@@ -57,11 +91,10 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
 
         //create instance DataNegozioJSon from json file "negozio1.json"
         negozioJSon = new DataNegozioJSon();
-        getDataNegozioJSon(negozioJSon);
+        getDataNegozioJSon();
 
-        RVProductListShopAdapter adapter = new RVProductListShopAdapter(negozioJSon.getListaprodotti());
-
-        rv.setAdapter(adapter);
+        rvAdapter = new RVProductListShopAdapter(negozioJSon.getListaprodotti());
+        rv.setAdapter(rvAdapter);
 
         mailRider = (EditText) findViewById(R.id.editTextMailRider);
         mailRider.setText(negozioJSon.getMailrider());
@@ -80,23 +113,24 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         //confirm button management
         if(v==confirm){
-            //tasto conferma cliccato
-            /*Snackbar.make(view, "Pulsante conferma cliccato", Snackbar.LENGTH_LONG)
+            Snackbar.make(v, "Salvataggio modifiche in corso", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-                    */
+
+            //save shop info on file json
+            saveShopFileJSon("OnClick");
 
         }
 
         //add new product management
         if(v==fab){
-           /* Snackbar.make(view, "Pulsante aggiunta nuovo prodotto", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-                    
-            */
+           Intent i = new Intent(this, NewProductActivity.class);
+
+           startNewProductActivityForResult(i);
+
         }
     }
 
-    public void getDataNegozioJSon(DataNegozioJSon negozioJSon){
+    private void getDataNegozioJSon(){
         //reading of json file in internal file directory "negozio1.json"
         String stringJSon = readShopFileJSon();
 
@@ -108,7 +142,7 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
         negozioJSon.setMailrider(negozioFromJSon.getMailrider());
     }
 
-    public String readShopFileJSon(){
+    private String readShopFileJSon(){
 
         File fileToOpen = new File(getFilesDir(), "negozio1.json");
         if(!fileToOpen.exists()){
@@ -133,7 +167,7 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
         return stringBuilder.toString();
     }
 
-    public void createFileJSon(){
+    private void createFileJSon(){
         AssetManager assetManager = getAssets();
         try (DataInputStream fileToCopy = new DataInputStream (new BufferedInputStream(assetManager.open("negozio1.json")));
              BufferedReader fileReaderToCopy = new BufferedReader(new InputStreamReader(fileToCopy));
@@ -152,4 +186,43 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
             e.printStackTrace();
         }
     }
+
+    private void saveShopFileJSon(String methodCalling){
+        //se la mail del rider è stata cambiata la aggiorno
+        negozioJSon.setMailrider(mailRider.getText().toString());
+
+        SaveShopFileJSonTask asyncSaveShopFileJSonTask = new SaveShopFileJSonTask(this, methodCalling);
+        asyncSaveShopFileJSonTask.execute(negozioJSon);
+
+    }
+
+    private void checkIntentActivity(Intent i){
+        if(i.hasExtra("NumberListProduct")){
+            //intent from newProductActivity
+            String nameProduct = i.getStringExtra("NameProduct");
+            String descriptionProduct = i.getStringExtra("DescriptionProduct");
+            float priceProduct = i.getFloatExtra("PriceProduct", 0F);
+            int numberListProduct = i.getIntExtra("NumberListProduct", -1);
+            if(numberListProduct==-1){
+                //new product management
+
+                Prodotto newProduct = new Prodotto(nameProduct, descriptionProduct, priceProduct);
+                negozioJSon.addNewProduct(newProduct);
+
+                //aggiornamento adapter recycler view per avere la recycler view aggiornata con il
+                // nuovo prodotto
+                rvAdapter.notifyItemInserted(negozioJSon.getListaprodotti().size()-1);
+            }else{
+                negozioJSon.modifyExistingProduct(numberListProduct, nameProduct, descriptionProduct, priceProduct);
+
+                //aggiornamento adapter recycler view per avere la recycler view aggiornata con il
+                // prodotto modificato
+                rvAdapter.notifyItemChanged(numberListProduct);
+            }
+
+
+        }
+    }
+
+
 }
