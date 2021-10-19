@@ -17,27 +17,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SharedPreferences sharedPreferences;
 
-    //creazione listener per gestione dei click sui bottoni di scelta tipo utente
-    /*private View.OnClickListener listenerNegozio = new View.OnClickListener(){
-        public void onClick(View v){
-            //setto variabile delle impostazioni tipoUtente a 1=negozio e faccio il commit della preferenza
-            sharedPreferences.edit().putInt("TipoUtente", 1);
-            sharedPreferences.edit().commit();
-            //lancio la nuova activity collegato al pulsante negozio
-            Intent intent = new Intent(getApplicationContext(), DisplayShopProductsActivity.class);
-            startActivity(intent);
-        }
-    };
-    private View.OnClickListener listenerCliente = new View.OnClickListener(){
-        public void onClick(View v){
-            //setto variabile delle impostazioni tipoUtente a 2=cliente e faccio il commit della preferenza
-            sharedPreferences.edit().putInt("TipoUtente", 2);
-            sharedPreferences.edit().commit();
-            //lancio la nuova activity collegata al pulsante cliente per inserire i dati del cliente
-            Intent intent = new Intent(getApplicationContext(), InsertCustomerDataActivity.class);
-            startActivity(intent);
-        }
-    };*/
     //implementazione dell'interfaccia OnClickListener distinguendo per la classe View v su cui viene effettuato il click
     public void onClick(View v){
         if((Button) v == buttonNegozio){
@@ -47,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.putInt(getString(R.string.preferences_user_type), 1);
             editor.apply();
             //lancio la nuova activity collegato al pulsante negozio per inserire il codice negozio
-            Intent intent = new Intent(getApplicationContext(), SearchShopActivity.class);
+            Intent intent = new Intent(this, SearchShopActivity.class);
             startActivity(intent);
         }
 
@@ -58,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.putInt(getString(R.string.preferences_user_type), 2);
             editor.apply();
             //lancio la nuova activity collegata al pulsante cliente per inserire i dati del cliente
-            Intent intent = new Intent(getApplicationContext(), InsertCustomerDataActivity.class);
+            Intent intent = new Intent(this, InsertCustomerDataActivity.class);
             startActivity(intent);
         }
 
@@ -69,10 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.putInt(getString(R.string.preferences_user_type), 3);
             editor.apply();
             //lancio la nuova activity collegata al pulsante rider per inserire il codice del rider
-            Intent intent = new Intent(getApplicationContext(), SearchRiderActivity.class);
+            Intent intent = new Intent(this, SearchRiderActivity.class);
             startActivity(intent);
         }
-
     }
 
     @Override
@@ -86,19 +64,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRider = (Button) findViewById(R.id.buttonRider);
 
         //inizializzazione riferimento a oggetto SharedPreferences
+        // utilizzo di un unico file preferences per questa activity
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
         //prendo la variabile nelle preferenze con nome TipoUtente
         int tipoUtente = sharedPreferences.getInt(getString(R.string.preferences_user_type),0);
 
-        //controllo se il tipoUtente era già stato scelto in precedenza (tipoUtente=0 non ancora scelto)
-        if(tipoUtente==0){
-            //collego i listener agli onClick dei 2 bottoni negozio e cliente
-            buttonNegozio.setOnClickListener(this);
-            buttonCliente.setOnClickListener(this);
-            buttonRider.setOnClickListener(this);
-        }
+        //collego i listener agli onClick dei 3 bottoni negozio, cliente e rider
+        buttonNegozio.setOnClickListener(this);
+        buttonCliente.setOnClickListener(this);
+        buttonRider.setOnClickListener(this);
 
+        //controllo se il tipoUtente era già stato scelto in precedenza (tipoUtente=0 non ancora scelto)
         //tipoUtente=1 negozio
         if(tipoUtente==1){
             //lancio la nuova activity per visualizzare l'activity per l'inserimento del codice negozio
@@ -109,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //tipoUtente=2 cliente
         if(tipoUtente==2){
             //lancio la nuova activity per far vedere al cliente la lista dei prodotti da acquistare dal negozio
-            Intent intent = new Intent(this, ProductListActivity.class);
+            Intent intent = new Intent(this, BuyProductsActivity.class);
             startActivity(intent);
         }
 
@@ -121,6 +98,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
 }
