@@ -100,7 +100,7 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
         mailRider.setText(negozioJSon.getMailrider());
 
         //add new product's button listener
-        fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.addNewProductButton);
         fab.setOnClickListener(this);
 
         //confirm button listener
