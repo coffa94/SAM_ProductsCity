@@ -20,16 +20,18 @@
 
     <EditText
         android:id="@+id/editTextNameProduct"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints="@string/edittext_hint_namenewproduct"
         android:ems="10"
         android:hint="@string/edittext_hint_namenewproduct"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLabelNewProduct"
-        android:autofillHints="@string/edittext_hint_namenewproduct" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewLabelNewProduct" />
 
     <EditText
         android:id="@+id/editTextDescriptionProduct"
@@ -51,16 +53,18 @@
 
     <EditText
         android:id="@+id/editTextPriceProduct"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:autofillHints="@string/edittext_hint_pricenewproduct"
         android:ems="10"
+        android:hint="@string/edittext_hint_pricenewproduct"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="@string/edittext_hint_pricenewproduct"
-        android:hint="@string/edittext_hint_pricenewproduct"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonConfirm"
