@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">ProductsCity</string>
+    <string name="preferences_file">PreferencesProductsCity</string>
+    <string name="preferences_user_type">TipoUtente</string>
+    <string name="preferences_name_customer">NameCustomer</string>
+    <string name="preferences_address_customer">AddressCustomer</string>
+    <string name="preferences_city_customer">CityCustomer</string>
+    <string name="preferences_cap_customer">CapCustomer</string>
+    <string name="preferences_province_customer">ProvinceCustomer</string>
+    <string name="preferences_phone_customer">PhoneCustomer</string>
+
     <string name="textview_label_user_type">Scegli tipo utente</string>
     <string name="button_negozio">Negozio</string>
     <string name="button_persona">Persona</string>
@@ -67,8 +76,6 @@
     <string name="edittext_label_pricenewproduct">Prezzo prodotto</string>
     <string name="edittext_hint_pricenewproduct">Inserisci il prezzo del prodotto</string>
 
-
-    <string name="preferences_user_type">TipoUtente</string>
 
     <string name="title_activity_display_shop_products">DisplayShopProductsActivity</string>
     <!-- Strings used for fragments for navigation -->
