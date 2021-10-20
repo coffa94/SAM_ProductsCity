@@ -48,6 +48,7 @@ public class MyGeocodingTask extends AsyncTask<Double, Void, Address> {
             linkedActivity.get().runOnUiThread(new Runnable(){
                 @Override
                 public void run() {
+                    //UI views updating with address info
                     ((EditText)linkedActivity.get().findViewById(R.id.editTextAddress)).setText(address.getAddressLine(0));
                     ((EditText)linkedActivity.get().findViewById(R.id.editTextCity)).setText(address.getLocality());
                     ((EditText)linkedActivity.get().findViewById(R.id.editTextCap)).setText(address.getPostalCode());

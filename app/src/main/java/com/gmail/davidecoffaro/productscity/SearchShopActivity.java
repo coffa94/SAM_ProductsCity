@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class SearchShopActivity extends AppCompatActivity implements View.OnClickListener {
     private Button buttonConferma;

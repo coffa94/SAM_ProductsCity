@@ -66,10 +66,9 @@ public class MyLocationClass {
                         } else {
                             Log.w(TAG, "getLastLocation:exception", task.getException());
                             showSnackbar("NoLocationDetected");
-                            /*mLastLocation.setLatitude(43.6770705891);
-                            mLastLocation.setLongitude(10.7333215122);
-                            Log.d("Latitude", new Double(mLastLocation.getLatitude()).toString());
-                            Log.d("Longitude", new Double(mLastLocation.getLongitude()).toString());*/
+
+                            //start geocode one a defaul latitude and longitude to make the android
+                            // VM work
                             ((InsertCustomerDataActivity)linkedActivity.get()).startGeocoding(43.6770705891, 10.7333215122);
                         }
                     }

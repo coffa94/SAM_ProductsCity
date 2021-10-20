@@ -82,16 +82,13 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
 
         setSupportActionBar(toolbar);
 
-
-        rv = (RecyclerView) findViewById(R.id.recyclerViewProductsList);
-
-        rv.setHasFixedSize(true);
-
-        rv.setLayoutManager(new LinearLayoutManager(this));
-
         //create instance DataNegozioJSon from json file "negozio1.json"
         negozioJSon = new DataNegozioJSon();
         getDataNegozioJSon();
+
+        rv = (RecyclerView) findViewById(R.id.recyclerViewProductsList);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
         rvAdapter = new RVProductListShopAdapter(negozioJSon.getListaprodotti());
         rv.setAdapter(rvAdapter);
@@ -124,7 +121,6 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
         //add new product management
         if(v==fab){
            Intent i = new Intent(this, NewProductActivity.class);
-
            startNewProductActivityForResult(i);
 
         }
