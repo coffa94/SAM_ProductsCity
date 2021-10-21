@@ -4,6 +4,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.gmail.davidecoffaro.productscity"
         minSdkVersion 21
@@ -12,6 +17,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation":
+                                      "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -37,5 +49,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+
 
 }
