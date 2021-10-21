@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.gmail.davidecoffaro.productscity.R;
@@ -12,6 +12,9 @@ import com.gmail.davidecoffaro.productscity.SearchShopActivity;
 import com.gmail.davidecoffaro.productscity.utilclass.DataNegozioJSon;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -60,10 +63,23 @@ public class SaveShopFileJSonTask extends AsyncTask<DataNegozioJSon, Void, Boole
 
     private Boolean saveShopFileJSon(DataNegozioJSon negozioJSon){
         Gson gson = new Gson();
-        String negozioJSonToSave = gson.toJson(negozioJSon);
+
+        //creazione jsonObject che conterrà l'intera stringa json
+        JsonObject jsonObject = new JsonObject();
+
+        //creazione jsonArray a partire dalla listaProdotti di DataNegozioJSon
+        JsonElement listaProdottiJsonElement = JsonParser.parseString(gson.toJson(negozioJSon.getListaprodotti()));
+        jsonObject.add("listaprodotti", listaProdottiJsonElement);
+
+        //creazione jsonPrimitive a partire dalla stringa mailRider di DataNegozioJSon
+        JsonElement mailRiderJsonElement = JsonParser.parseString(gson.toJson(negozioJSon.getMailrider()));
+        jsonObject.add("mailrider", mailRiderJsonElement);
+
+        String negozioJSonToSave = jsonObject.toString();
+
+        Log.d("JSON", negozioJSonToSave);
 
         return writeFileJSon(negozioJSonToSave);
-
     }
 
     private Boolean writeFileJSon(String stringJSonToSave){
