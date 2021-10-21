@@ -21,58 +21,110 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_launcher_background"
                 android:contentDescription="Image product"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
                 android:id="@+id/textViewProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/imageViewProductImage"
                 android:text="ProductName"
 
                 android:textSize="30sp" />
 
             <TextView
+                android:id="@+id/textViewProductDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewProductName"
+                android:layout_alignStart="@+id/textViewProductName"
+                android:layout_alignParentEnd="true"
+                android:text="ProductDescription" />
+
+            <TextView
                 android:id="@+id/textViewLabelProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageViewProductImage"
+                android:layout_below="@+id/textViewProductDescription"
+                android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/imageViewProductImage"
-                android:text="Prezzo:"
-                android:textSize="16sp" />
+                android:text="Prezzo:" />
 
             <TextView
                 android:id="@+id/textViewProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/imageViewProductImage"
+                android:layout_below="@+id/textViewProductDescription"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/textViewLabelProductPrice"
-                android:text="ProductPrice"
-                android:textSize="16sp" />
+                android:text="ProductPrice" />
+
+            <TextView
+                android:id="@+id/textViewLabelEuro2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewProductDescription"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/textViewProductPrice"
+                android:text="@string/textview_label_totaleuros" />
+
+            <TextView
+                android:id="@+id/textViewLabelQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewLabelProductPrice"
+                android:layout_alignStart="@+id/textViewLabelProductPrice"
+                android:layout_marginTop="8dp"
+                android:text="@string/textview_label_quantity" />
 
             <EditText
                 android:id="@+id/editTextQuantityProductToBuy"
-                android:layout_width="49dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageViewProductImage"
+                android:layout_below="@+id/textViewProductPrice"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_toStartOf="@+id/textViewTotalPriceProduct"
+                android:layout_toEndOf="@+id/textViewLabelQuantity"
                 android:ems="10"
                 android:inputType="number"
-                android:text="0" />
+                android:text="0"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewLabelTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextQuantityProductToBuy"
+                android:layout_alignStart="@+id/textViewLabelQuantity"
+                android:layout_alignEnd="@+id/textViewLabelQuantity"
+                android:text="@string/textview_label_totalarticle" />
 
             <TextView
                 android:id="@+id/textViewTotalPriceProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageViewProductImage"
-                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/textViewLabelTotalPrice"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/textViewLabelTotalPrice"
+                android:text="0"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewLabelEuro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textViewLabelTotalPrice"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/textViewTotalPriceProduct"
                 android:text="@string/textview_label_totaleuros" />
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

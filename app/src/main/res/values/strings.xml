@@ -38,7 +38,9 @@
     <string name="edittext_hint_phonecustomer">Inserisci il cellulare cliente</string>
 
     <string name="textview_label_buyproductlist">Lista prodotti da acquistare</string>
+    <string name="textview_label_quantity">Quantità</string>
     <string name="textview_label_totaleuros">€</string>
+    <string name="textview_label_totalarticle">Tot.Art.</string>
     <string name="textview_label_totalorder">Totale ordine</string>
     <string name="button_next">Avanti</string>
 

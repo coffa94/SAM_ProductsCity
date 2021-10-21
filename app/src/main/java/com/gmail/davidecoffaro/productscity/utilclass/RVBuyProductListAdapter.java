@@ -23,6 +23,7 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView nameProduct;
+        TextView descriptionProduct;
         TextView priceProduct;
         ImageView imageProduct;
         EditText quantityProduct;
@@ -32,6 +33,7 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             nameProduct = (TextView) itemView.findViewById(R.id.textViewProductName);
+            descriptionProduct = (TextView) itemView.findViewById(R.id.textViewProductDescription);
             priceProduct = (TextView) itemView.findViewById(R.id.textViewProductPrice);
             imageProduct = (ImageView) itemView.findViewById(R.id.imageViewProductImage);
             quantityProduct = (EditText) itemView.findViewById(R.id.editTextQuantityProductToBuy);
@@ -57,6 +59,7 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.nameProduct.setText(listaProdotti.get(position).getNome());
+        holder.descriptionProduct.setText(listaProdotti.get(position).getDescrizione());
         holder.priceProduct.setText(Float.toString(listaProdotti.get(position).getPrezzo()));
 
         String urlImage = listaProdotti.get(position).getImmagine();
