@@ -11,6 +11,12 @@
       "descrizione": "Descrizione2",
       "prezzo":2.0,
       "immagine":"https://www.google.com/url?sa=i&url=https%3A%2F%2Frosenroses.it%2Fprodotto%2Forso-peluche-30cm%2F&psig=AOvVaw0OAoPOjs3OKrSqKE2tyJG8&ust=1634570484084000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCVvtrf0fMCFQAAAAAdAAAAABAJ"
+    },
+    {
+      "nome":"Prodotto3",
+      "descrizione": "Descrizione3",
+      "prezzo":3.5,
+      "immagine":""
     }
   ],
   "mailrider": "mailrider@gmail.com"
