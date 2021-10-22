@@ -1,8 +1,10 @@
 package com.gmail.davidecoffaro.productscity.utilclass.task;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.gmail.davidecoffaro.productscity.BuyProductsActivity;
+import com.gmail.davidecoffaro.productscity.CustomerCartActivity;
 import com.gmail.davidecoffaro.productscity.utilclass.Prodotto;
 import com.gmail.davidecoffaro.productscity.utilclass.databaseclass.NegozioDatabase;
 
@@ -10,11 +12,13 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class DatabaseTask extends AsyncTask<Prodotto[], Void, List<Prodotto>> {
-    WeakReference<BuyProductsActivity> linkedActivity;
+    WeakReference<Activity> linkedActivity;
     String operation;
+    Class activityType;
 
-    public DatabaseTask(BuyProductsActivity inputActivity, String inputOperation){
-        linkedActivity = new WeakReference<BuyProductsActivity>(inputActivity);
+    public DatabaseTask(Activity inputActivity, String inputOperation){
+        linkedActivity = new WeakReference<Activity>(inputActivity);
+        activityType = inputActivity.getClass();
         operation = inputOperation;
     }
 
@@ -32,6 +36,9 @@ public class DatabaseTask extends AsyncTask<Prodotto[], Void, List<Prodotto>> {
             case "Insert":
                 NegozioDatabase.database.prodottoDao().insert(prodotti[0][0]);
                 return null;
+            case "Update":
+                NegozioDatabase.database.prodottoDao().update(prodotti[0]);
+                return null;
             case "GetAll":
                 return NegozioDatabase.database.prodottoDao().getAll();
             case "GetBuyed":
@@ -46,19 +53,38 @@ public class DatabaseTask extends AsyncTask<Prodotto[], Void, List<Prodotto>> {
     protected void onPostExecute(List<Prodotto> listaProdotti) {
         switch (operation){
             case "DeleteAll":
-                linkedActivity.get().insertAllProducts();
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).insertAllProducts();
+                }
                 break;
             case "InsertAll":
-                linkedActivity.get().getAllProducts();
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).getAllProducts();;
+                }
                 break;
             case "Insert":
-                linkedActivity.get().getAllProducts();
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).getAllProducts();;;
+                }
+                break;
+            case "Update":
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).startCustomerCartActivity();
+                }
                 break;
             case "GetAll":
-                linkedActivity.get().updateRecyclerViewAdapter(listaProdotti);
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).updateRecyclerViewAdapter(listaProdotti);;;
+                }
                 break;
             case "GetBuyed":
-                linkedActivity.get().updateRecyclerViewAdapter(listaProdotti);
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).updateRecyclerViewAdapter(listaProdotti);;
+                }
+                if(activityType== CustomerCartActivity.class){
+                    ((CustomerCartActivity)linkedActivity.get()).updateRecyclerViewAdapter(listaProdotti);;
+                }
+
         }
 
     }
