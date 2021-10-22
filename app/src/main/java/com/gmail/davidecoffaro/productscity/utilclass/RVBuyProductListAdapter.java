@@ -35,6 +35,9 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
         //total order view management
         TextView totalOrder;
 
+        //reference to Prodotto in listaProdotti, to update its quantity
+        Prodotto prodotto;
+
         public ProductViewHolder(View itemView) {
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
@@ -84,6 +87,12 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
                 float currentTotalOrder = Float.parseFloat(totalOrder.getText().toString());
                 float newTotalOrder = currentTotalOrder + (moltiplicationTotalPrice);
                 totalOrder.setText(String.valueOf(newTotalOrder));
+
+                //update quantity in prodotto variable
+                if(prodotto!=null){
+                    prodotto.setQuantita((int)factorQuantityProduct);
+                }
+
             }else{
                 totalPriceProduct.setText(String.valueOf(0.0));
             }
@@ -113,6 +122,8 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
 
         //update total price article
         holder.totalPriceProduct.setText(String.valueOf((float) listaProdotti.get(position).getPrezzo()*listaProdotti.get(position).getQuantita()));
+
+        holder.prodotto = listaProdotti.get(position);
 
         String urlImage = listaProdotti.get(position).getImmagine();
         //TODO translate url to image

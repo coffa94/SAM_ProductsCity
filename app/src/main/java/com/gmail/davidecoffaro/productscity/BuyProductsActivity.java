@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,7 +21,7 @@ import com.gmail.davidecoffaro.productscity.utilclass.task.InsertAllDatabaseTask
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyProductsActivity extends AppCompatActivity {
+public class BuyProductsActivity extends AppCompatActivity implements View.OnClickListener{
     TextView totalOrder;
     RecyclerView rv;
     RVBuyProductListAdapter adapter;
@@ -36,6 +38,8 @@ public class BuyProductsActivity extends AppCompatActivity {
         totalOrder = (TextView) findViewById(R.id.textViewTotalOrder);
         next = (Button) findViewById(R.id.buttonNext);
 
+        next.setOnClickListener(this);
+
         //getting information shop from file negozio1.json
         negozioJSon = new DataNegozioJSon(this);
         negozioJSon.getDataNegozioJSon();
@@ -47,7 +51,6 @@ public class BuyProductsActivity extends AppCompatActivity {
 
         DatabaseTask deleteAll = new DatabaseTask(this, "DeleteAll");
         deleteAll.execute(new Prodotto[0]);
-
 
         //initialize recyclerView without setting the adapter, it will be setted when the asyncTask
         // database finishes the query execution
@@ -71,8 +74,42 @@ public class BuyProductsActivity extends AppCompatActivity {
     }
 
     public void updateRecyclerViewAdapter(List<Prodotto> listaProdotti){
+        //set lista prodotti on negozioJSon as the same of the recycler view adapter, to link
+        // together the changes in the variables
+        negozioJSon.setListaprodotti((ArrayList<Prodotto>) listaProdotti);
+
+        //creation of adapter of recycler view from listaProdotti returned from the query
         adapter = new RVBuyProductListAdapter(listaProdotti);
 
         rv.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==next){
+            //click on next button
+            //tried without make an update query to see if the changes in the listaProdotti sono
+            // portati automaticamente dentro il database essendo collegati la tabella e gli oggetti
+            // di tipo Prodotto all'interno di essa, non funziona perché dentro la tabella è stata
+            // copiata la nuova lista di tipo Prodotto[] e inoltre l'adapter della recycler view è
+            // una ArrayList<Prodotti> creati a partire dalla query di database, le due liste non
+            // coincidono, quindi ho bisogno dell'update righe database
+
+
+            //take listaProdotti from negozioJSon and update table Prodotto in database with these
+            // new data (with quantity changed)
+            Prodotto[] paramProdottoDatabase = new Prodotto[negozioJSon.getListaprodotti().size()];
+            paramProdottoDatabase = negozioJSon.getListaprodotti().toArray(paramProdottoDatabase);
+
+            DatabaseTask update = new DatabaseTask(this, "Update");
+            update.execute(paramProdottoDatabase);
+
+        }
+    }
+
+    public void startCustomerCartActivity(){
+        //start next activity
+        Intent i = new Intent(this, CustomerCartActivity.class);
+        startActivity(i);
     }
 }

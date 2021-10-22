@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.gmail.davidecoffaro.productscity.utilclass.Prodotto;
 
@@ -16,6 +17,9 @@ public interface ProdottoDao {
 
     @Insert
     void insert(Prodotto prodotto);
+
+    @Update
+    void update(Prodotto... prodotti);
 
     @Query("SELECT * FROM prodotto")
     List<Prodotto> getAll();
