@@ -1,5 +1,8 @@
 package com.gmail.davidecoffaro.productscity.utilclass;
 
+import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,7 @@ import java.util.List;
 
 public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductListAdapter.ProductViewHolder> {
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder implements TextWatcher {
         CardView cv;
         TextView nameProduct;
         TextView descriptionProduct;
@@ -28,6 +31,9 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
         ImageView imageProduct;
         EditText quantityProduct;
         TextView totalPriceProduct;
+
+        //total order view management
+        TextView totalOrder;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -38,8 +44,50 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
             imageProduct = (ImageView) itemView.findViewById(R.id.imageViewProductImage);
             quantityProduct = (EditText) itemView.findViewById(R.id.editTextQuantityProductToBuy);
             totalPriceProduct = (TextView) itemView.findViewById(R.id.textViewTotalPriceProduct);
+
+            //add listener on text changed
+            quantityProduct.addTextChangedListener(this);
+
+            //get view total order from BuyProductsActivity
+            totalOrder = (TextView) ((Activity)itemView.getContext()).findViewById(R.id.textViewTotalOrder);
+
         }
 
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            //substract the current total price article (before update the text) from total order
+            if(!quantityProduct.getText().toString().equals("")){
+                //int quantityBeforeUpdate = Integer.parseInt(quantityProduct.getText().toString());
+                float totalPriceBeforeUpdate = Float.parseFloat(totalPriceProduct.getText().toString());
+                float currentTotalOrder = Float.parseFloat(totalOrder.getText().toString());
+                float newTotalOrder = currentTotalOrder - totalPriceBeforeUpdate;
+                totalOrder.setText(String.valueOf(newTotalOrder));
+            }
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            //get the new total price article after the text changed in view quantityProduct
+            if(!(quantityProduct.getText().toString().equals(""))){
+                float factorPriceProduct = Float.parseFloat(priceProduct.getText().toString());
+                float factorQuantityProduct = Float.parseFloat(s.toString());
+                float moltiplicationTotalPrice =  factorPriceProduct * factorQuantityProduct;
+                totalPriceProduct.setText(String.valueOf(moltiplicationTotalPrice));
+
+                //total order updating adding new total price article
+                float currentTotalOrder = Float.parseFloat(totalOrder.getText().toString());
+                float newTotalOrder = currentTotalOrder + (moltiplicationTotalPrice);
+                totalOrder.setText(String.valueOf(newTotalOrder));
+            }else{
+                totalPriceProduct.setText(String.valueOf(0.0));
+            }
+        }
     }
 
     private List<Prodotto> listaProdotti;
@@ -61,6 +109,10 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
         holder.nameProduct.setText(listaProdotti.get(position).getNome());
         holder.descriptionProduct.setText(listaProdotti.get(position).getDescrizione());
         holder.priceProduct.setText(Float.toString(listaProdotti.get(position).getPrezzo()));
+        holder.quantityProduct.setText(String.valueOf(listaProdotti.get(position).getQuantita()));
+
+        //update total price article
+        holder.totalPriceProduct.setText(String.valueOf((float) listaProdotti.get(position).getPrezzo()*listaProdotti.get(position).getQuantita()));
 
         String urlImage = listaProdotti.get(position).getImmagine();
         //TODO translate url to image
