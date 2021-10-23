@@ -42,7 +42,8 @@ public class SaveShopFileJSonTask extends AsyncTask<DataNegozioJSon, Void, Boole
             if(result.booleanValue()){
                 Intent i = new Intent(linkedActivity.get(), SearchShopActivity.class);
                 i.putExtra("Saved", result.booleanValue());
-                linkedActivity.get().startActivity(i);
+                linkedActivity.get().setResult(Activity.RESULT_OK, i);
+                linkedActivity.get().finish();
             }else{
                 Snackbar.make(linkedActivity.get().findViewById(R.id.buttonConfirm), "Salvataggio non completato", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
