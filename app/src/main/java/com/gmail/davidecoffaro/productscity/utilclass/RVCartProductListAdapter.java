@@ -21,7 +21,7 @@ public class RVCartProductListAdapter extends RecyclerView.Adapter<RVCartProduct
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView nameProduct;
-        TextView priceProduct;
+        TextView descriptionProduct;
         ImageView imageProduct;
         TextView quantityProduct;
         TextView totalPriceProduct;
@@ -30,7 +30,7 @@ public class RVCartProductListAdapter extends RecyclerView.Adapter<RVCartProduct
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             nameProduct = (TextView) itemView.findViewById(R.id.textViewProductName);
-            priceProduct = (TextView) itemView.findViewById(R.id.textViewProductPrice);
+            descriptionProduct = (TextView) itemView.findViewById(R.id.textViewProductDescriptionCart);
             imageProduct = (ImageView) itemView.findViewById(R.id.imageViewProductImage);
             quantityProduct = (TextView) itemView.findViewById(R.id.textViewQuantityProductToBuy);
             totalPriceProduct = (TextView) itemView.findViewById(R.id.textViewTotalPriceProduct);
@@ -55,7 +55,9 @@ public class RVCartProductListAdapter extends RecyclerView.Adapter<RVCartProduct
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.nameProduct.setText(listaProdotti.get(position).getNome());
-        holder.priceProduct.setText(Float.toString(listaProdotti.get(position).getPrezzo()));
+        holder.descriptionProduct.setText(listaProdotti.get(position).getDescrizione());
+        holder.quantityProduct.setText(String.valueOf(listaProdotti.get(position).getQuantita()));
+        holder.totalPriceProduct.setText(String.valueOf((float) listaProdotti.get(position).getQuantita()* listaProdotti.get(position).getPrezzo()));
 
         String urlImage = listaProdotti.get(position).getImmagine();
         //TODO translate url to image
