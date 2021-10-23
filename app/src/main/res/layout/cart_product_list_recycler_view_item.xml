@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
@@ -37,39 +36,59 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/textViewLabelProductPrice"
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewProductDescriptionCart"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageViewProductImage"
-                android:layout_toEndOf="@id/imageViewProductImage"
-                android:text="Prezzo:"
-                android:textSize="16sp" />
+                android:layout_below="@+id/textViewProductName"
+                android:layout_alignStart="@+id/textViewProductName"
+                android:layout_alignParentEnd="true"
+                android:text="ProductDescription" />
 
             <TextView
-                android:id="@+id/textViewProductPrice"
+                android:id="@+id/textViewLabelQuantityProductToBuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/imageViewProductImage"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/textViewLabelProductPrice"
-                android:text="ProductPrice"
-                android:textSize="16sp" />
+                android:layout_below="@+id/textViewProductDescriptionCart"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/imageViewProductImage"
+                android:text="@string/textview_label_quantityproducttobuy" />
 
             <TextView
                 android:id="@+id/textViewQuantityProductToBuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageViewProductImage"
+                android:layout_below="@+id/textViewProductDescriptionCart"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/textViewLabelQuantityProductToBuy" />
+
+            <TextView
+                android:id="@+id/textViewLabelTotalPriceCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewProductDescriptionCart"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_toStartOf="@+id/textViewTotalPriceProduct"
-                android:text="@string/textview_label_quantityproducttobuy" />
+                android:text="@string/textview_label_totalarticle" />
 
             <TextView
                 android:id="@+id/textViewTotalPriceProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageViewProductImage"
+                android:layout_below="@+id/textViewProductDescriptionCart"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@+id/textViewLabelEuroCart"
+                android:text="0.0" />
+
+            <TextView
+                android:id="@+id/textViewLabelEuroCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewProductDescriptionCart"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
                 android:text="@string/textview_label_totaleuros" />
         </RelativeLayout>
 
