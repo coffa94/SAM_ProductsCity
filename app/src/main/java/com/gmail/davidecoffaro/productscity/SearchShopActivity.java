@@ -40,14 +40,10 @@ public class SearchShopActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if(v==buttonConferma){
 
-            //no internet connection
-            //TODO gestire controllo connessione internet
-
+            //check if codiceNegozio is correct
             if(!(editTextCodiceNegozio.getText().toString().equals("negozio1"))){
                 Toast.makeText(this, R.string.error_codice_negozio,Toast.LENGTH_SHORT).show();
             }else{
-                //TODO scarica e importa file json relativo al negozio per avere lista dei prodotti e mail del rider
-
                 //display new activity
                 Intent i = new Intent(this, InfoShopActivity.class);
                 startActivity(i);
