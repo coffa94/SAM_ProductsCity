@@ -44,6 +44,7 @@
     <string name="textview_label_totalarticle">Tot.Art.</string>
     <string name="textview_label_totalorder">Totale ordine</string>
     <string name="button_next">Avanti</string>
+    <string name="error_no_product">Errore! Nessun articolo selezionato.</string>
 
     <string name="textview_label_cartsummary">Riepilogo carrello</string>
     <string name="textview_label_totalarticlescartsummary">Totale articoli</string>
