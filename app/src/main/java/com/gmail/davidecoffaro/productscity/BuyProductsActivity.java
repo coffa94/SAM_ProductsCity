@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gmail.davidecoffaro.productscity.utilclass.DataNegozioJSon;
 import com.gmail.davidecoffaro.productscity.utilclass.Prodotto;
@@ -95,14 +96,20 @@ public class BuyProductsActivity extends AppCompatActivity implements View.OnCli
             // una ArrayList<Prodotti> creati a partire dalla query di database, le due liste non
             // coincidono, quindi ho bisogno dell'update righe database
 
+            //if total order is 0, no products was buyed
+            if(totalOrder.getText().toString().equals("0.0")){
+                Toast.makeText(this, R.string.error_no_product,Toast.LENGTH_SHORT).show();
+            }else{
+                //take listaProdotti from negozioJSon and update table Prodotto in database with these
+                // new data (with quantity changed)
+                Prodotto[] paramProdottoDatabase = new Prodotto[negozioJSon.getListaprodotti().size()];
+                paramProdottoDatabase = negozioJSon.getListaprodotti().toArray(paramProdottoDatabase);
 
-            //take listaProdotti from negozioJSon and update table Prodotto in database with these
-            // new data (with quantity changed)
-            Prodotto[] paramProdottoDatabase = new Prodotto[negozioJSon.getListaprodotti().size()];
-            paramProdottoDatabase = negozioJSon.getListaprodotti().toArray(paramProdottoDatabase);
+                DatabaseTask update = new DatabaseTask(this, "Update");
+                update.execute(paramProdottoDatabase);
+            }
 
-            DatabaseTask update = new DatabaseTask(this, "Update");
-            update.execute(paramProdottoDatabase);
+
 
         }
     }
