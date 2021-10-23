@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.gmail.davidecoffaro.productscity.utilclass.MyLocationClass;
 import com.gmail.davidecoffaro.productscity.utilclass.task.MyGeocodingTask;
@@ -30,6 +31,8 @@ public class InsertCustomerDataActivity extends AppCompatActivity implements Vie
     private SharedPreferences sharedPreferences; //save customer info in sharedPreferences
 
     MyLocationClass myLocation;
+
+    boolean modifyCustomerInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,14 @@ public class InsertCustomerDataActivity extends AppCompatActivity implements Vie
         //initialize myLocation variable to get locationUser
         myLocation = new MyLocationClass(this);
         myLocation.createMethod();
+
+        Intent i = getIntent();
+        if(i.hasExtra("LabelInfoCliente")){
+            ((TextView) findViewById(R.id.textViewLabelInfoCustomer)).setText(i.getStringExtra("LabelInfoCliente"));
+            modifyCustomerInfo = true;
+        }else{
+            modifyCustomerInfo=false;
+        }
 
     }
 
@@ -109,9 +120,16 @@ public class InsertCustomerDataActivity extends AppCompatActivity implements Vie
             editor.putString(getString(R.string.preferences_phone_customer), phoneCustomer.getText().toString());
             editor.apply();
 
-            //start next activity BuyProductsActivity
-            Intent i = new Intent(this, BuyProductsActivity.class);
-            startActivity(i);
+            //check if previous activity was customerCartActivity
+            if(modifyCustomerInfo){
+                //finish activity and come back to customerCartActivity to complete buying task
+                finish();
+            }else{
+                //start next activity BuyProductsActivity
+                Intent i = new Intent(this, BuyProductsActivity.class);
+                startActivity(i);
+            }
+
 
         }
 
