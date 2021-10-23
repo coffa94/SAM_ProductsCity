@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.ref.WeakReference;
+import java.nio.file.Path;
 
 public class MyLocationClass {
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
@@ -58,7 +59,9 @@ public class MyLocationClass {
                         if (task.isSuccessful() && task.getResult() != null) {
                             mLastLocation = task.getResult();
 
-                            ((InsertCustomerDataActivity)linkedActivity.get()).startGeocoding(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                            if(linkedActivity.get().getClass()==InsertCustomerDataActivity.class){
+                                ((InsertCustomerDataActivity)linkedActivity.get()).startGeocoding(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                            }
 
                             Log.d("Latitude", Double.toString(mLastLocation.getLatitude()));
                             Log.d("Longitude", Double.toString(mLastLocation.getLongitude()));
@@ -176,6 +179,7 @@ public class MyLocationClass {
     }
 
     public void getLocation(){
+        //TODO non prendere getLastLocation (utilizza quella nella cache), ma prendere getCurrentLocation (sempre di fusedLocationProviderClient)
         getLastLocation();
     }
 }

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.widget.EditText;
 
+import com.gmail.davidecoffaro.productscity.InsertCustomerDataActivity;
 import com.gmail.davidecoffaro.productscity.R;
 
 import java.io.IOException;
@@ -45,17 +46,20 @@ public class MyGeocodingTask extends AsyncTask<Double, Void, Address> {
         super.onPostExecute(address);
 
         if(address!=null){
-            linkedActivity.get().runOnUiThread(new Runnable(){
-                @Override
-                public void run() {
-                    //UI views updating with address info
-                    ((EditText)linkedActivity.get().findViewById(R.id.editTextAddress)).setText(address.getAddressLine(0));
-                    ((EditText)linkedActivity.get().findViewById(R.id.editTextCity)).setText(address.getLocality());
-                    ((EditText)linkedActivity.get().findViewById(R.id.editTextCap)).setText(address.getPostalCode());
-                    ((EditText)linkedActivity.get().findViewById(R.id.editTextProvince)).setText(address.getSubAdminArea());
+            if(linkedActivity.get().getClass()== InsertCustomerDataActivity.class){
+                linkedActivity.get().runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        //UI views updating with address info
+                        ((EditText)linkedActivity.get().findViewById(R.id.editTextAddress)).setText(address.getAddressLine(0));
+                        ((EditText)linkedActivity.get().findViewById(R.id.editTextCity)).setText(address.getLocality());
+                        ((EditText)linkedActivity.get().findViewById(R.id.editTextCap)).setText(address.getPostalCode());
+                        ((EditText)linkedActivity.get().findViewById(R.id.editTextProvince)).setText(address.getSubAdminArea());
 
-                }
-            });
+                    }
+                });
+            }
+
         }
 
 
