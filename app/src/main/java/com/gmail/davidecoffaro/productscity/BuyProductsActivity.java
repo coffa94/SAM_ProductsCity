@@ -110,6 +110,7 @@ public class BuyProductsActivity extends AppCompatActivity implements View.OnCli
     public void startCustomerCartActivity(){
         //start next activity
         Intent i = new Intent(this, CustomerCartActivity.class);
+        i.putExtra("EXTRA_RIDER_MAIL", negozioJSon.getMailrider());
         startActivity(i);
     }
 }
