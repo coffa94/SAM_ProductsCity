@@ -34,21 +34,23 @@
         android:id="@+id/textViewLabelTotalOrderCartSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/textview_label_totalorder"
-        android:textSize="30sp"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/buttonModify"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/buttonModify" />
 
     <TextView
         android:id="@+id/textViewTotalOrderCartSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLabelTotalOrderCartSummary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewLabelTotalOrderCartSummary" />
+        app:layout_constraintEnd_toEndOf="@id/textViewLabelEuro" />
 
     <Button
         android:id="@+id/buttonConfirm"
@@ -83,21 +85,22 @@
         android:id="@+id/textViewLabelTotalArticlesCartSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/textview_label_totalarticlescartsummary"
-        android:textSize="30sp"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewLabelTotalOrderCartSummary"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/buttonModify" />
 
     <TextView
         android:id="@+id/textViewTotalArticlesCartSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLabelTotalArticlesCartSummary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewLabelTotalArticlesCartSummary" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewTotalOrderCartSummary" />
 
     <TextView
         android:id="@+id/textViewLabelSendingData"
@@ -128,5 +131,16 @@
         android:text="Indirizzo citta"
         app:layout_constraintBottom_toTopOf="@+id/buttonBack"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLabelEuro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/textview_label_totaleuros"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLabelTotalOrderCartSummary"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
