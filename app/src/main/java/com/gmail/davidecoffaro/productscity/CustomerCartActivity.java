@@ -3,11 +3,14 @@ package com.gmail.davidecoffaro.productscity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -100,45 +103,63 @@ public class CustomerCartActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if(v==modify){
-            //TODO click button modify
+            //click button modify
             Intent i = new Intent(this, InsertCustomerDataActivity.class);
             i.putExtra("LabelInfoCliente", "Modifica dati cliente");
             startActivity(i);
         }
         if(v==back){
-            //TODO click button back
+            //click button back
             finish();
         }
         if(v==confirm){
-            //TODO click button confirm
+            //click button confirm
 
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setData(Uri.parse("mailto:"));
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_EMAIL, new String[] {mailRider});
-            i.putExtra(Intent.EXTRA_SUBJECT, "Ordine ProductsCity");
+            //check internet connection
+            ConnectivityManager cm =
+                    (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            //body mail construction
-            StringBuilder bodyMail = new StringBuilder();
-            bodyMail.append("Ordine da consegnare.\n");
-            bodyMail.append("Informazioni cliente: \n");
-            bodyMail.append(nameSurnameCustomer.getText().toString() + "\n");
-            bodyMail.append(completeAddressCustomer.getText().toString() + "\n");
-            bodyMail.append(phoneNumberCustomer + "\n");
-            bodyMail.append("\n");
-            bodyMail.append("Articoli da consegnare: \n");
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
 
-            //set body of the mail with products selected from customer
-            for (Prodotto p : listaProdotti){
-                bodyMail.append("   - " + p.getNome() + ", " + p.getQuantita() + "\n");
+
+            if(isConnected==false){
+                Toast.makeText(this, R.string.error_internet_connection,Toast.LENGTH_SHORT).show();
+            }else{
+
+                //internet connection OK
+                //set intent to send an email to mailRider with order info
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setData(Uri.parse("mailto:"));
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_EMAIL, new String[] {mailRider});
+                i.putExtra(Intent.EXTRA_SUBJECT, "Ordine ProductsCity");
+
+                //body mail construction
+                StringBuilder bodyMail = new StringBuilder();
+                bodyMail.append("Ordine da consegnare.\n");
+                bodyMail.append("Informazioni cliente: \n");
+                bodyMail.append(nameSurnameCustomer.getText().toString() + "\n");
+                bodyMail.append(completeAddressCustomer.getText().toString() + "\n");
+                bodyMail.append(phoneNumberCustomer + "\n");
+                bodyMail.append("\n");
+                bodyMail.append("Articoli da consegnare: \n");
+
+                //set body of the mail with products selected from customer
+                for (Prodotto p : listaProdotti){
+                    bodyMail.append("   - " + p.getNome() + ", " + p.getQuantita() + "\n");
+                }
+                bodyMail.append("\n");
+
+                bodyMail.append("Totale articoli: " + totalArticles.getText().toString() + "\n");
+                bodyMail.append("Totale ordine: € " + totalOrder.getText().toString() + "\n");
+
+                i.putExtra(Intent.EXTRA_TEXT, bodyMail.toString());
+                startActivity(i);
             }
-            bodyMail.append("\n");
 
-            bodyMail.append("Totale articoli: " + totalArticles.getText().toString() + "\n");
-            bodyMail.append("Totale ordine: € " + totalOrder.getText().toString() + "\n");
 
-            i.putExtra(Intent.EXTRA_TEXT, bodyMail.toString());
-            startActivity(i);
         }
     }
 

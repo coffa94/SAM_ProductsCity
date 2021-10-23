@@ -50,6 +50,7 @@
     <string name="textview_label_quantityproducttobuy">Q.tà</string>
     <string name="button_back">Indietro</string>
     <string name="button_modify">Modifica</string>
+    <string name="error_internet_connection">Errore! Controlla la tua connessione internet.</string>
 
     <string name="textview_label_datetimeorder">Scelta data e ora di consegna</string>
     <string name="textview_label_calendar">Calendario</string>
