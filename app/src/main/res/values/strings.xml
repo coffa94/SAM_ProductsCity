@@ -13,6 +13,7 @@
     <string name="button_negozio">Negozio</string>
     <string name="button_persona">Persona</string>
     <string name="button_rider">Rider</string>
+
     <string name="textview_label_codice_negozio">Inserisci codice negozio</string>
     <string name="inputedittext_hint_codice_negozio">Codice negozio</string>
     <string name="button_conferma">Conferma</string>
@@ -65,10 +66,12 @@
 
     <string name="textview_label_codicerider">Inserisci codice rider</string>
     <string name="edittext_hint_codicerider">Codice rider</string>
+    <string name="error_codice_rider">Errore! Codice rider non è corretto!</string>
 
     <string name="textview_label_pathdelivery">Percorso di consegna rider</string>
     <string name="button_pathdelivery">Calcola percorso</string>
     <string name="edittext_hint_pathdelivery">Indirizzo di consegna</string>
+    <string name="error_addressdelivery">Errore! Inserisci l\'indirizzo di consegna</string>
 
 
     <string name="textview_label_newproduct">Crea nuovo prodotto</string>
