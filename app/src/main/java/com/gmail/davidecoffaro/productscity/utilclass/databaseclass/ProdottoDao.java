@@ -27,4 +27,10 @@ public interface ProdottoDao {
     @Query("SELECT * FROM prodotto WHERE quantita>0")
     List<Prodotto> getBuyed();
 
+    @Query("SELECT SUM(quantita) AS totalearticoli FROM prodotto WHERE quantita>0")
+    Float getTotalArticles();
+
+    @Query("SELECT SUM(prezzo*quantita) AS totaleordine FROM prodotto WHERE quantita>0")
+    Float getTotalOrder();
+
 }

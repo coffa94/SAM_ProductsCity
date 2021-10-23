@@ -84,7 +84,7 @@ public class DatabaseTask extends AsyncTask<Prodotto[], Void, List<Prodotto>> {
                 if(activityType== CustomerCartActivity.class){
                     ((CustomerCartActivity)linkedActivity.get()).updateRecyclerViewAdapter(listaProdotti);;
                 }
-
+                break;
         }
 
     }
