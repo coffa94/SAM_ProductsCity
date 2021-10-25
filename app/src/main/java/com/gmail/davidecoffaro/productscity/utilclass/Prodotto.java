@@ -16,7 +16,8 @@ public class Prodotto {
     private String descrizione;
     @ColumnInfo(name="prezzo")
     private float prezzo;
-    private String immagine;
+    @ColumnInfo(name="urlimmagine")
+    private String urlimmagine;
     @ColumnInfo(name="quantita")
     private int quantita;
 
@@ -27,20 +28,22 @@ public class Prodotto {
         this.quantita=0;
     }*/
 
-    public Prodotto(String nome, String descrizione, float prezzo){
+    /*public Prodotto(String nome, String descrizione, float prezzo){
         this.nome = nome;
         this.descrizione = descrizione;
         this.prezzo = prezzo;
         this.quantita=0;
     }
-    /*
-    public Prodotto(String nome, String descrizione, float prezzo, String immagine){
+
+     */
+
+    public Prodotto(String nome, String descrizione, float prezzo, String urlimmagine){
         this.nome = nome;
         this.descrizione = descrizione;
         this.prezzo = prezzo;
-        this.immagine = immagine;
+        this.urlimmagine = urlimmagine;
         this.quantita=0;
-    }*/
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -54,8 +57,8 @@ public class Prodotto {
         this.prezzo = prezzo;
     }
 
-    public void setImmagine(String immagine) {
-        this.immagine = immagine;
+    public void setUrlImmagine(String immagine) {
+        this.urlimmagine = immagine;
     }
 
     public void setQuantita(int quantita) {
@@ -74,8 +77,8 @@ public class Prodotto {
         return prezzo;
     }
 
-    public String getImmagine() {
-        return immagine;
+    public String getUrlimmagine() {
+        return urlimmagine;
     }
 
     public int getQuantita() {

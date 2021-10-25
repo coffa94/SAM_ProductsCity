@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1de077d1d7a7028a0e3f97f0f147aac3",
+    "identityHash": "ea050c4290ac404a27f8ac4775353558",
     "entities": [
       {
         "tableName": "Prodotto",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`productid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT, `descrizione` TEXT, `prezzo` REAL NOT NULL, `immagine` TEXT, `quantita` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`productid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT, `descrizione` TEXT, `prezzo` REAL NOT NULL, `urlimmagine` TEXT, `quantita` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "productid",
@@ -33,8 +33,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "immagine",
-            "columnName": "immagine",
+            "fieldPath": "urlImmagine",
+            "columnName": "urlimmagine",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -58,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1de077d1d7a7028a0e3f97f0f147aac3')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ea050c4290ac404a27f8ac4775353558')"
     ]
   }
 }
