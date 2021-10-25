@@ -19,19 +19,23 @@ import com.gmail.davidecoffaro.productscity.InsertCustomerDataActivity;
 import com.gmail.davidecoffaro.productscity.MainActivity;
 import com.gmail.davidecoffaro.productscity.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.ref.WeakReference;
-import java.nio.file.Path;
 
 public class MyLocationClass {
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String TAG = MainActivity.class.getSimpleName();
     protected Location mLastLocation;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
 
     WeakReference<Activity> linkedActivity;
 
@@ -69,10 +73,6 @@ public class MyLocationClass {
                         } else {
                             Log.w(TAG, "getLastLocation:exception", task.getException());
                             showSnackbar("NoLocationDetected");
-
-                            //start geocode one a defaul latitude and longitude to make the android
-                            // VM work
-                            ((InsertCustomerDataActivity)linkedActivity.get()).startGeocoding(43.6770705891, 10.7333215122);
                         }
                     }
                 });
@@ -94,7 +94,7 @@ public class MyLocationClass {
         if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.");
 
-            showSnackbar("permission_rationale", "ok",
+            showSnackbar("Permesso posizione non accettato", "Autorizza",
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -130,7 +130,7 @@ public class MyLocationClass {
                 Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted.
-                getLastLocation();
+                getCurrentLocation();
             } else {
                 // Permission denied.
 
@@ -163,7 +163,7 @@ public class MyLocationClass {
     }
 
     private void showSnackbar(final String text) {
-        View container = linkedActivity.get().findViewById(R.id.editTextPersonName);
+        View container = linkedActivity.get().findViewById(R.id.buttonLocate);
         if (container != null) {
             Snackbar.make(container, text, Snackbar.LENGTH_LONG).show();
         }
@@ -171,15 +171,56 @@ public class MyLocationClass {
 
     private void showSnackbar(final String mainTextStringId, final String actionStringId,
                               View.OnClickListener listener) {
-        Snackbar.make(linkedActivity.get().findViewById(android.R.id.content),
-                //getString(mainTextStringId),
-                mainTextStringId,
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(actionStringId, listener).show();
+        View container = linkedActivity.get().findViewById(R.id.buttonLocate);
+        if(container!= null){
+            Snackbar.make(container,
+                    //getString(mainTextStringId),
+                    mainTextStringId,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(actionStringId, listener).show();
+        }
+
     }
 
-    public void getLocation(){
-        //TODO non prendere getLastLocation (utilizza quella nella cache), ma prendere getCurrentLocation (sempre di fusedLocationProviderClient)
-        getLastLocation();
+    @SuppressWarnings("MissingPermission")
+    public void getCurrentLocation(){
+        //permission ACCESS_FINE_LOCATION ok?
+        if(checkPermissions()){
+            //get current location using the google API fusedLocationClient, repeat it 2 times to get the correct location
+            for(int i = 0; i<2; i++){
+
+                locationRequest = LocationRequest.create();
+                locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                //get just one time location update
+                locationRequest.setNumUpdates(1);
+
+                locationCallback = new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        if (locationResult != null) {
+                            Location lastLocation = locationResult.getLastLocation();
+                            if(linkedActivity.get().getClass()==InsertCustomerDataActivity.class){
+                                //translate latitude and longitude to an address
+                                ((InsertCustomerDataActivity)linkedActivity.get()).startGeocoding(lastLocation.getLatitude(), lastLocation.getLongitude());
+                            }
+
+                            Log.d("Latitude", Double.toString(lastLocation.getLatitude()));
+                            Log.d("Longitude", Double.toString(lastLocation.getLongitude()));
+
+                        }else{
+                            Log.w(TAG, "getCurrentLocation error");
+                            showSnackbar("NoLocationDetected");
+
+                            getLastLocation();
+                        }
+
+                    }
+                };
+
+                mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+            }
+        }else{
+            requestPermissions();
+        }
     }
 }
