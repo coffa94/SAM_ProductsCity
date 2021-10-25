@@ -15,6 +15,7 @@ public class NewProductActivity extends AppCompatActivity implements View.OnClic
     EditText nameProduct;
     EditText descriptionProduct;
     EditText priceProduct;
+    EditText urlImageProduct;
     Button confirm;
     int numberModifingProduct;
 
@@ -26,6 +27,8 @@ public class NewProductActivity extends AppCompatActivity implements View.OnClic
         nameProduct = (EditText) findViewById(R.id.editTextNameProduct);
         descriptionProduct = (EditText) findViewById(R.id.editTextDescriptionProduct);
         priceProduct = (EditText) findViewById(R.id.editTextPriceProduct);
+        urlImageProduct = (EditText) findViewById(R.id.editTextUrlImage);
+
         confirm = (Button) findViewById(R.id.buttonConfirm);
 
         confirm.setOnClickListener(this);
@@ -53,12 +56,29 @@ public class NewProductActivity extends AppCompatActivity implements View.OnClic
                         .setAction("Action", null).show();
                 return;
             }
+            //check url image not empty and that is a .png file
+            if(urlImageProduct.getText().toString().equals("")){
+                Snackbar.make(v, "Immagine prodotto mancante", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                return;
+            }
+            if(!(urlImageProduct.getText().toString().contains(".png"))){
+                Snackbar.make(v, "Immagine prodotto deve essere in formato .PNG", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                return;
+            }
+            /*
+             * if(!(urlImageProduct.getText().toString().equals("")) && !(urlImageProduct.getText().toString().contains(".png"))){
+                Snackbar.make(v, "Immagine prodotto deve essere in formato .PNG", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                return;
+            }*/
 
             Intent i = new Intent(v.getContext(), InfoShopActivity.class);
             i.putExtra("NameProduct" , nameProduct.getText().toString());
             i.putExtra("DescriptionProduct" , descriptionProduct.getText().toString());
             i.putExtra("PriceProduct", Float.parseFloat(priceProduct.getText().toString()));
-            //i.putExtra("StringImageProduct", stringImage);
+            i.putExtra("UrlImageProduct", urlImageProduct.getText().toString());
             i.putExtra("NumberListProduct", numberModifingProduct);
             setResult(RESULT_OK, i);
             finish();
@@ -72,7 +92,7 @@ public class NewProductActivity extends AppCompatActivity implements View.OnClic
             nameProduct.setText(i.getStringExtra("NameProduct"));
             descriptionProduct.setText(i.getStringExtra("DescriptionProduct"));
             priceProduct.setText(i.getStringExtra("PriceProduct"));
-            //stringImageProduct.setText(i.getStringExtra("stringImageProduct"));
+            urlImageProduct.setText(i.getStringExtra("UrlImageProduct"));
 
             //number modifing product in the list of the shop
             numberModifingProduct = i.getIntExtra("NumberListProduct", 0);
