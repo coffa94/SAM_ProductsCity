@@ -2,7 +2,6 @@ package com.gmail.davidecoffaro.productscity.utilclass;
 
 import android.app.Activity;
 import android.content.Context;
-import android.inputmethodservice.InputMethodService;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,10 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.davidecoffaro.productscity.R;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.net.URL;
 import java.util.List;
 
 public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductListAdapter.ProductViewHolder> {
@@ -141,11 +136,7 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
         holder.prodotto = listaProdotti.get(position);
 
         String urlImage = listaProdotti.get(position).getUrlimmagine();
-        //TODO translate url to image
-        //holder.imageProduct.setImageResource(listaProdotti.get(position).getImmagine());
-
-        //holder.quantityProduct.setText(listaProdotti.get(position).getQuantity());
-        //holder.quantityProduct.setText(listaProdotti.get(position).getTotalPrice());
+        //translate url to image
 
         Picasso.get()
                 .load(urlImage) // URL or file

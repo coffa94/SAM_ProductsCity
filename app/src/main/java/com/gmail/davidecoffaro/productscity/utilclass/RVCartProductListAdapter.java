@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.davidecoffaro.productscity.R;
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 import java.util.List;
@@ -59,12 +60,13 @@ public class RVCartProductListAdapter extends RecyclerView.Adapter<RVCartProduct
         holder.quantityProduct.setText(String.valueOf(listaProdotti.get(position).getQuantita()));
         holder.totalPriceProduct.setText(String.valueOf((float) listaProdotti.get(position).getQuantita()* listaProdotti.get(position).getPrezzo()));
 
-        String urlImage = listaProdotti.get(position).getImmagine();
-        //TODO translate url to image
-        //holder.imageProduct.setImageResource(listaProdotti.get(position).getImmagine());
+        String urlImage = listaProdotti.get(position).getUrlimmagine();
+        //translate url to image
 
-        //holder.quantityProduct.setText(listaProdotti.get(position).getQuantity());
-        //holder.quantityProduct.setText(listaProdotti.get(position).getTotalPrice());
+        Picasso.get()
+                .load(urlImage) // URL or file
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .into(holder.imageProduct); // An ImageView object to show the loaded image
 
     }
 

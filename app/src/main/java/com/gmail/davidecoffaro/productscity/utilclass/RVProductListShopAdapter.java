@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gmail.davidecoffaro.productscity.InfoShopActivity;
 import com.gmail.davidecoffaro.productscity.NewProductActivity;
 import com.gmail.davidecoffaro.productscity.R;
+import com.gmail.davidecoffaro.productscity.utilclass.task.ImageDownloaderTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class RVProductListShopAdapter extends RecyclerView.Adapter<RVProductList
         TextView descriptionProduct;
         TextView priceProduct;
         ImageView imageProduct;
-        String stringImage;
+        String urlImage;
 
         public ProductViewHolder(View itemView){
             super(itemView);
@@ -45,9 +47,8 @@ public class RVProductListShopAdapter extends RecyclerView.Adapter<RVProductList
             i.putExtra("NameProduct" , nameProduct.getText());
             i.putExtra("DescriptionProduct" , descriptionProduct.getText());
             i.putExtra("PriceProduct", priceProduct.getText());
-            i.putExtra("StringImageProduct", stringImage);
+            i.putExtra("UrlImageProduct", urlImage);
             i.putExtra("NumberListProduct", getAdapterPosition());
-            //v.getContext().startActivity(i);
             ((InfoShopActivity) v.getContext()).startNewProductActivityForResult(i);
 
         }
@@ -73,11 +74,13 @@ public class RVProductListShopAdapter extends RecyclerView.Adapter<RVProductList
         holder.descriptionProduct.setText(listaProdotti.get(position).getDescrizione());
         holder.priceProduct.setText(Float.toString(listaProdotti.get(position).getPrezzo()));
 
-        holder.stringImage = listaProdotti.get(position).getImmagine();
-        //TODO translate url to image
-        //ImageDownloaderTask imageDownloaderTask = new ImageDownloaderTask(holder.imageProduct);
-        //imageDownloaderTask.execute(stringImage);
-        //holder.imageProduct = null;
+        holder.urlImage = listaProdotti.get(position).getUrlimmagine();
+        //translate url to image
+
+        Picasso.get()
+                .load(holder.urlImage) // URL or file
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .into(holder.imageProduct); // An ImageView object to show the loaded image
     }
 
     @Override
