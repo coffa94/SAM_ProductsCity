@@ -31,9 +31,9 @@ public class RecapOrderActivity extends AppCompatActivity implements View.OnClic
         rv.setLayoutManager(new LinearLayoutManager(this));
 
         List<Prodotto> listaProdotti = new ArrayList<Prodotto>();
-        listaProdotti.add(new Prodotto("prodotto1", 35f));
-        listaProdotti.add(new Prodotto("prodotto2", 2f));
-        listaProdotti.add(new Prodotto("prodotto3", 14f));
+        //listaProdotti.add(new Prodotto("prodotto1", 35f));
+        //listaProdotti.add(new Prodotto("prodotto2", 2f));
+        //listaProdotti.add(new Prodotto("prodotto3", 14f));
 
         RVCartProductListAdapter adapter = new RVCartProductListAdapter(listaProdotti);
 

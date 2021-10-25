@@ -70,6 +70,9 @@ public class SearchShopActivity extends AppCompatActivity implements View.OnClic
 
                     }
 
+                    //reset codice negozio
+                    editTextCodiceNegozio.setText("");
+
                 }
             });
 }

@@ -17,42 +17,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SharedPreferences sharedPreferences;
 
-    //implementazione dell'interfaccia OnClickListener distinguendo per la classe View v su cui viene effettuato il click
-    public void onClick(View v){
-        if((Button) v == buttonNegozio){
-            //cliccato sul pulsante negozio
-            //setto variabile delle impostazioni tipoUtente a 1=negozio e faccio il commit della preferenza
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(getString(R.string.preferences_user_type), 1);
-            editor.apply();
-            //lancio la nuova activity collegato al pulsante negozio per inserire il codice negozio
-            Intent intent = new Intent(this, SearchShopActivity.class);
-            startActivity(intent);
-        }
-
-        if((Button) v == buttonCliente){
-            //cliccato sul pulsante cliente
-            //setto variabile delle impostazioni tipoUtente a 2=cliente e faccio il commit della preferenza
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(getString(R.string.preferences_user_type), 2);
-            editor.apply();
-            //lancio la nuova activity collegata al pulsante cliente per inserire i dati del cliente
-            Intent intent = new Intent(this, InsertCustomerDataActivity.class);
-            startActivity(intent);
-        }
-
-        if((Button)v == buttonRider){
-            //cliccato sul pulsante rider
-            //setto variabile delle impostazioni tipoUtente a 3=rider e faccio il commit della preferenza
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(getString(R.string.preferences_user_type), 3);
-            editor.apply();
-            //lancio la nuova activity collegata al pulsante rider per inserire il codice del rider
-            Intent intent = new Intent(this, SearchRiderActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,5 +61,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
 
+    }
+
+    //implementazione dell'interfaccia OnClickListener distinguendo per la classe View v su cui viene effettuato il click
+    public void onClick(View v){
+        if((Button) v == buttonNegozio){
+            //cliccato sul pulsante negozio
+            //setto variabile delle impostazioni tipoUtente a 1=negozio e faccio il commit della preferenza
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.preferences_user_type), 1);
+            editor.apply();
+            //lancio la nuova activity collegato al pulsante negozio per inserire il codice negozio
+            Intent intent = new Intent(this, SearchShopActivity.class);
+            startActivity(intent);
+        }
+
+        if((Button) v == buttonCliente){
+            //cliccato sul pulsante cliente
+            //setto variabile delle impostazioni tipoUtente a 2=cliente e faccio il commit della preferenza
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.preferences_user_type), 2);
+            editor.apply();
+            //lancio la nuova activity collegata al pulsante cliente per inserire i dati del cliente
+            Intent intent = new Intent(this, InsertCustomerDataActivity.class);
+            startActivity(intent);
+        }
+
+        if((Button)v == buttonRider){
+            //cliccato sul pulsante rider
+            //setto variabile delle impostazioni tipoUtente a 3=rider e faccio il commit della preferenza
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.preferences_user_type), 3);
+            editor.apply();
+            //lancio la nuova activity collegata al pulsante rider per inserire il codice del rider
+            Intent intent = new Intent(this, SearchRiderActivity.class);
+            startActivity(intent);
+        }
     }
 }
