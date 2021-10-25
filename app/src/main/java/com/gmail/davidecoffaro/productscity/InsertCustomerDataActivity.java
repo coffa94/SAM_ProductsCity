@@ -136,7 +136,7 @@ public class InsertCustomerDataActivity extends AppCompatActivity implements Vie
         //click su pulsante localizza
         if (v == locate) {
             //check for current user's location
-            myLocation.getLocation();
+            myLocation.getCurrentLocation();
         }
     }
 
