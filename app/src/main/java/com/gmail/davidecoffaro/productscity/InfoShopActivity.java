@@ -132,18 +132,19 @@ public class InfoShopActivity extends AppCompatActivity implements View.OnClickL
             String nameProduct = i.getStringExtra("NameProduct");
             String descriptionProduct = i.getStringExtra("DescriptionProduct");
             float priceProduct = i.getFloatExtra("PriceProduct", 0F);
+            String urlImage = i.getStringExtra("UrlImageProduct");
             int numberListProduct = i.getIntExtra("NumberListProduct", -1);
             if(numberListProduct==-1){
                 //new product management
 
-                Prodotto newProduct = new Prodotto(nameProduct, descriptionProduct, priceProduct);
+                Prodotto newProduct = new Prodotto(nameProduct, descriptionProduct, priceProduct,urlImage);
                 negozioJSon.addNewProduct(newProduct);
 
                 //aggiornamento adapter recycler view per avere la recycler view aggiornata con il
                 // nuovo prodotto
                 rvAdapter.notifyItemInserted(negozioJSon.getListaprodotti().size()-1);
             }else{
-                negozioJSon.modifyExistingProduct(numberListProduct, nameProduct, descriptionProduct, priceProduct);
+                negozioJSon.modifyExistingProduct(numberListProduct, nameProduct, descriptionProduct, priceProduct, urlImage);
 
                 //aggiornamento adapter recycler view per avere la recycler view aggiornata con il
                 // prodotto modificato
