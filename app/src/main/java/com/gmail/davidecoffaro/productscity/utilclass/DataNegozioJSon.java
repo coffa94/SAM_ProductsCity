@@ -65,10 +65,11 @@ public class DataNegozioJSon {
         listaprodotti.add(newProduct);
     }
 
-    public void modifyExistingProduct(int numberProduct, String newNameProduct, String newDescriptionProduct, float newPrice){
+    public void modifyExistingProduct(int numberProduct, String newNameProduct, String newDescriptionProduct, float newPrice, String urlImage){
         listaprodotti.get(numberProduct).setNome(newNameProduct);
         listaprodotti.get(numberProduct).setDescrizione(newDescriptionProduct);
         listaprodotti.get(numberProduct).setPrezzo(newPrice);
+        listaprodotti.get(numberProduct).setUrlImmagine(urlImage);
     }
 
     public void getDataNegozioJSon(){
@@ -95,9 +96,10 @@ public class DataNegozioJSon {
                 String nomeProdotto = listaProdottiJSon.get(i).getAsJsonObject().getAsJsonPrimitive("nome").getAsString();
                 String descrizioneProdotto = listaProdottiJSon.get(i).getAsJsonObject().getAsJsonPrimitive("descrizione").getAsString();
                 float prezzoProdotto = listaProdottiJSon.get(i).getAsJsonObject().getAsJsonPrimitive("prezzo").getAsFloat();
+                String urlImmagine = listaProdottiJSon.get(i).getAsJsonObject().getAsJsonPrimitive("urlimmagine").getAsString();
 
                 //nuovo prodotto dai dati presi dall'elemento i-esimo dell'array Prodotto nel file json
-                Prodotto newProdotto = new Prodotto(nomeProdotto,descrizioneProdotto, prezzoProdotto);
+                Prodotto newProdotto = new Prodotto(nomeProdotto,descrizioneProdotto, prezzoProdotto, urlImmagine);
 
                 //inserimento nella listaProdotti del nuovo prodotto
                 listaprodotti.add(newProdotto);
