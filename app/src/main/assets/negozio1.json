@@ -4,19 +4,19 @@
       "nome":"Prodotto1",
       "descrizione": "Descrizione1",
       "prezzo":1.0,
-      "immagine":"https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F41%2F07%2Fc0%2F4107c02cc044a009dd470d0edc76be35.png&imgrefurl=https%3A%2F%2Fwww.pinterest.at%2Fpin%2F699887598317528072%2F&tbnid=HafojK1Hwrib1M&vet=12ahUKEwjesZOM6tHzAhUEqaQKHYqVB-UQMygAegUIARCgAQ..i&docid=ckFqbK6omIAvBM&w=400&h=400&q=immagini%20100x100%20pixel&ved=2ahUKEwjesZOM6tHzAhUEqaQKHYqVB-UQMygAegUIARCgAQ"
+      "urlimmagine":"https://i.pinimg.com/originals/41/07/c0/4107c02cc044a009dd470d0edc76be35.png"
     },
     {
       "nome":"Prodotto2",
       "descrizione": "Descrizione2",
       "prezzo":2.0,
-      "immagine":"https://www.google.com/url?sa=i&url=https%3A%2F%2Frosenroses.it%2Fprodotto%2Forso-peluche-30cm%2F&psig=AOvVaw0OAoPOjs3OKrSqKE2tyJG8&ust=1634570484084000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCVvtrf0fMCFQAAAAAdAAAAABAJ"
+      "urlimmagine":"https://cdn.pixabay.com/photo/2017/08/10/23/55/png-2629072_1280.png"
     },
     {
       "nome":"Prodotto3",
       "descrizione": "Descrizione3",
       "prezzo":3.5,
-      "immagine":""
+      "urlimmagine":"https://www.vinatis.it/29955-thickbox_default/champagne-bollinger-special-cuvee-mezza-bottiglia.png"
     }
   ],
   "mailrider": "mailrider@gmail.com"
