@@ -45,6 +45,7 @@
     <string name="textview_label_totalorder">Totale ordine</string>
     <string name="button_next">Avanti</string>
     <string name="error_no_product">Errore! Nessun articolo selezionato.</string>
+    <string name="action_reset_buyproductlist">Elimina quantità</string>
 
     <string name="textview_label_cartsummary">Riepilogo carrello</string>
     <string name="textview_label_totalarticlescartsummary">Totale articoli</string>
@@ -82,6 +83,7 @@
     <string name="edittext_hint_descriptionnewproduct">Inserisci la descrizione del prodotto</string>
     <string name="edittext_label_pricenewproduct">Prezzo prodotto</string>
     <string name="edittext_hint_pricenewproduct">Inserisci il prezzo del prodotto</string>
+    <string name="edittext_hint_imageenewproduct">Inserisci l\'immagine png del prodotto</string>
 
 
     <string name="title_activity_display_shop_products">DisplayShopProductsActivity</string>
