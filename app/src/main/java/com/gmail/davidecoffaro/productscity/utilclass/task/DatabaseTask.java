@@ -39,6 +39,9 @@ public class DatabaseTask extends AsyncTask<Prodotto[], Void, List<Prodotto>> {
             case "Update":
                 NegozioDatabase.database.prodottoDao().update(prodotti[0]);
                 return null;
+            case "UpdateStartNewActivity":
+                NegozioDatabase.database.prodottoDao().update(prodotti[0]);
+                return null;
             case "GetAll":
                 return NegozioDatabase.database.prodottoDao().getAll();
             case "GetBuyed":
@@ -68,6 +71,11 @@ public class DatabaseTask extends AsyncTask<Prodotto[], Void, List<Prodotto>> {
                 }
                 break;
             case "Update":
+                if(activityType==BuyProductsActivity.class){
+                    ((BuyProductsActivity)linkedActivity.get()).closeDatabaseConnection();
+                }
+                break;
+            case "UpdateStartNewActivity":
                 if(activityType==BuyProductsActivity.class){
                     ((BuyProductsActivity)linkedActivity.get()).startCustomerCartActivity();
                 }
