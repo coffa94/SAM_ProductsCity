@@ -2,71 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageViewProductImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="16dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_weight="0.25"
+                android:adjustViewBounds="true"
                 android:contentDescription="Image product"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                android:background="@drawable/ic_launcher_background"/>
+                android:scaleType="fitCenter" />
 
-            <TextView
-                android:id="@+id/textViewProductName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/imageViewProductImage"
-                android:text="ProductName"
-
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/textViewProductDescription"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewProductName"
-                android:layout_alignStart="@+id/textViewProductName"
-                android:layout_alignParentEnd="true"
-                android:text="ProductDescription" />
+                android:layout_weight="0.75"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/textViewLabelProductPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewProductDescription"
-                android:layout_marginTop="9dp"
-                android:layout_toEndOf="@id/imageViewProductImage"
-                android:text="Prezzo:"
-                android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/textViewProductPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewProductDescription"
-                android:layout_marginTop="9dp"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/textViewLabelProductPrice"
-                android:text="ProductPrice"
-                android:textSize="30sp" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/textViewProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+
+                    android:text="ProductName"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/textViewProductDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewProductName"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="ProductDescription" />
+
+                <TextView
+                    android:id="@+id/textViewLabelProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewProductDescription"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="9dp"
+                    android:text="Prezzo:"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/textViewProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewProductDescription"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@+id/textViewLabelProductPrice"
+                    android:text="ProductPrice"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>
