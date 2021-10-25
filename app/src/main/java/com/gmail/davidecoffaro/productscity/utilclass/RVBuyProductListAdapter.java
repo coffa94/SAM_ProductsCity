@@ -1,11 +1,14 @@
 package com.gmail.davidecoffaro.productscity.utilclass;
 
 import android.app.Activity;
+import android.content.Context;
+import android.inputmethodservice.InputMethodService;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +18,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.davidecoffaro.productscity.R;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -23,7 +27,7 @@ import java.util.List;
 
 public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductListAdapter.ProductViewHolder> {
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder implements TextWatcher {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder implements TextWatcher, View.OnFocusChangeListener {
         CardView cv;
         TextView nameProduct;
         TextView descriptionProduct;
@@ -50,6 +54,9 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
 
             //add listener on text changed
             quantityProduct.addTextChangedListener(this);
+
+            //set listener when editText loses its focus -> to close the keyboard
+            quantityProduct.setOnFocusChangeListener(this);
 
             //get view total order from BuyProductsActivity
             totalOrder = (TextView) ((Activity)itemView.getContext()).findViewById(R.id.textViewTotalOrder);
@@ -97,6 +104,14 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
                 totalPriceProduct.setText(String.valueOf(0.0));
             }
         }
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if(v==quantityProduct && !hasFocus ){
+                InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
     }
 
     private List<Prodotto> listaProdotti;
@@ -125,13 +140,17 @@ public class RVBuyProductListAdapter extends RecyclerView.Adapter<RVBuyProductLi
 
         holder.prodotto = listaProdotti.get(position);
 
-        String urlImage = listaProdotti.get(position).getImmagine();
+        String urlImage = listaProdotti.get(position).getUrlimmagine();
         //TODO translate url to image
         //holder.imageProduct.setImageResource(listaProdotti.get(position).getImmagine());
 
         //holder.quantityProduct.setText(listaProdotti.get(position).getQuantity());
         //holder.quantityProduct.setText(listaProdotti.get(position).getTotalPrice());
 
+        Picasso.get()
+                .load(urlImage) // URL or file
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .into(holder.imageProduct); // An ImageView object to show the loaded image
     }
 
     @Override
